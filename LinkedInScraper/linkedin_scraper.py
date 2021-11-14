@@ -66,11 +66,14 @@ class LinkedInScraper:
                 if "firstName" in key:
                     name = f"{key['firstName']} {key['lastName']}"
                     profile_data["name"] = name
-                    headline_parts = key["headline"].split("at")
+                    headline_parts = key["headline"].split(" at ")
                     profile_data["title"] = headline_parts[0].strip()
                     if len(headline_parts) > 1:
                         profile_data["company"] = headline_parts[1].strip()
-                    profile_data["about"] = key["summary"]
+                    if "summary" in key:
+                        profile_data["about"] = key["summary"]
+                    else:
+                        profile_data["about"] = ""
                 elif "countryUrn" in key:
                     profile_data["location"] = key["defaultLocalizedName"]
                 elif "companyName" in key and "dateRange" in key:
@@ -85,7 +88,7 @@ class LinkedInScraper:
     def __get_search_url(self, page, search_term):
         url = f"{self.search_url}{urllib.parse.quote(search_term)}"
         if page > 1:
-            url += f"page={page}"
+            url += f"&page={page}"
         return url
 
     def __login(self, session):
