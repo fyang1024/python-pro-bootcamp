@@ -17,8 +17,7 @@ Once the environment variables are set up, you can run the program as below
 ```shell
 python main.py 'head of people, head of hr' 11
 ```
-The program will use "head of people" and "head of hr" as keywords and for each keyword it will scrape 11 search results and export the data into a CSV file people.csv
-The columns of the CSV are:
+The program will use "head of people" and "head of hr" as keywords and for each keyword it will scrape 11 search results and export the data into a CSV file people.csv. The columns of the CSV are:
 * location
 * company
 * name
